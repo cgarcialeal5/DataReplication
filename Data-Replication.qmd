@@ -1,0 +1,10 @@
+---
+title: "Data Replication Project"
+author: "Cristina Garcia Leal"
+format: html
+editor: visual
+---
+
+# Paper
+
+## Citation:
