@@ -1,8 +1,11 @@
 ---
 title: "Data Replication Project"
 author: "Cristina Garcia Leal"
-format: html
-editor: visual
+output:
+  html:
+    css: Style_CSS.css
+toc: TRUE
+toc_depth: 2
 ---
 
 # Introduction:
@@ -12,3 +15,11 @@ editor: visual
 Ashley E. Sharpe, Juan Manuel Palomo, Takeshi Inomata, Daniela Triadan, Flory Pinzón, Jason Curtis, Kitty Emery, George Kamenov, John Krigbaum, Jessica MacLellan, María Paula Weihmüller, *An isotopic examination of Maya Preclassic and Classic animal and human diets at Ceibal, Guatemala,* Journal of Archaeological Science: Reports, Volume 55, 2024, 104522, ISSN 2352-409X, <https://doi.org/10.1016/j.jasrep.2024.104522.>
 
 ## Summary of the article:
+
+-   No elvel
+
+# Analysis One:
+
+-   Level 1
+
+    -   Level 2
