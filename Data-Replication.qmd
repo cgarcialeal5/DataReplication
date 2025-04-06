@@ -3,23 +3,86 @@ title: "Data Replication Project"
 author: "Cristina Garcia Leal"
 output:
   html:
-    css: Style_CSS.css
+    css: "Styles/Style_CSS.css"
+    document-css: true
 toc: TRUE
 toc_depth: 2
 ---
 
-# Introduction:
-
-## Citation:
+# Citation:
 
 Ashley E. Sharpe, Juan Manuel Palomo, Takeshi Inomata, Daniela Triadan, Flory Pinzón, Jason Curtis, Kitty Emery, George Kamenov, John Krigbaum, Jessica MacLellan, María Paula Weihmüller, *An isotopic examination of Maya Preclassic and Classic animal and human diets at Ceibal, Guatemala,* Journal of Archaeological Science: Reports, Volume 55, 2024, 104522, ISSN 2352-409X, <https://doi.org/10.1016/j.jasrep.2024.104522.>
 
-## Summary of the article:
+# The Original Study:
 
--   No elvel
+This article attempts to answer a question that has plagued Maya archaeologists ever since they first understood the magnitude of these ancient civilizations: How did the Maya sustain their cities through time and fluctuations in the population? The authors emphasize that there was no "universal" Maya diet, and as such, there was a lot of variation in dietary patterns across sites and across time. Thus, they argue, Ceibal is an ideal site to examine diet and subsistence through time because it had a long occupation that spanned from 1100 BC to 1200 CE. Ceibal was a significant political and ceremonial Maya center that experienced significant changes during its long occupation, including periods of abandonment and reoccupation.
 
-# Analysis One:
+## Methods:
 
--   Level 1
+To examine this, the authors aimed to understand the relationship between animals and humans, hoping to trace shifts in diet and animal management. Their methods involved using isotope analysis to get information about the samples. The study measured carbon, oxygen, and strontium isotope in dental enamel. Carbon (𝛅C^13^) was used to trace maize consumption by determining the proportion of C4 plants in the diet, oxygen (𝛅O^18^) was used to trace drinking water sources and estimate mobility, and strontium (Sr^87^/Sr^86^) was used to trace geographic origins based on regional geology. All three isotopes were measured for faunal samples, however only carbon isotopes were measured for the human samples.
 
-    -   Level 2
+The measured isotope values for animals and humans were then analyzed statistically. The authors present descriptive statistics of the dog and deer isotope values for carbon, oxygen and strontium organized by chronological order. The distribution of values for each isotope was also analyzed statistically for each animal. Student's t-tests were employed on the carbon values for dogs and humans for each time period to compare the difference in diets over time.
+
+## Data Used:
+
+The fauna data contained 63 samples from non-human mammals excavated in Ceibal. The samples were excavated from different archaeological contexts and represented various different time periods, from the Early Middle Preclassic (1000-700 BCE) all the way to the Terminal Classic (810-950 CE). These samples came from various different types of teeth (molars, premolars, canines, and incisors). These faunal samples came from the following animals:
+
+1.  Domestic dog (*Canis lupus familiaris*): 45 samples
+2.  White-tailed deer (*Odocoileus virginianus*): 7 samples
+3.  Peccary (*Tayassuidae cf. Dicotyles tajacu*): 2 samples
+4.  Baird’s tapir (*Tapirella bairdii*): 3 samples
+5.  Large feline (possibly *Panthera onca*): 2 sample
+6.  Margay (*Leopardus wiedii*): 1 sample
+7.  Agouti (*Dasyprocta punctata*): 1 sample
+8.  Paca (*Cuniculus paca*): 1 sample
+9.  Opossum (*Philander opossum*): 1 sample
+
+The human data contained 21 samples from third molars and also represented individuals from different time periods. However, this sample only ranged from the Early Middle Preclassic to the Late Classic, there are no individuals from the Terminal Classic.
+
+## Results:
+
+The strontium measurements in the faunal sample suggest that dogs were the most mobile species and indicate that a large portion of the dogs came from regions south and west of Ceibal. The authors highlight one specific dog, whose strontium values match the volcanic highlands, which supports evidence that dogs were transported over long distances. Furthermore, oxygen values for dogs match Ceibal's water sources, pointing to domestication. On the other hand, strontium and oxygen values for deer are both consistent with local and regional sources. Interestingly, the strontium values of the peccary and agouti also suggest non-local origins, which could be the result of either hunting zones or trade networks.
+
+The carbon isotope results were also quite interesting. Dogs generally had higher values for carbon isotopes than humans, which indicates that dogs were eating more maize than humans were. Carbon results for deer were as expected, low values of 𝛅C^13^ are consistent with a diet based on forest plants (C3 plants). Contrary to this, one large feline had higher 𝛅C^13^ values than expected. Considering that these animals are carnivores, the elevated carbon values are evidence of higher maize consumption and could indicate that this animal was in captivity. The moderate values for the peccary and agouti imply that these animals consumed at least some maize. Lastly, carbon values for the human sample showed a clear increase of maize consumption through time, especially during the transition between the Preclassic and Classic periods.
+
+## Conclusions:
+
+When these results were compared across time periods and compared to human consumption of maize (as evidenced by the carbon values of the human sample), several conclusions can be reached. First of all, the strontium and oxygen values indicate that deer were local and their carbon values do not point towards domestication. Thus, the authors conclude that they were probably locally hunted.
+
+Carbon values for dogs suggest that they were fed maize from the Preclassic period and their dependence on maize increased heavily towards the Late Preclassic Period. However, variability during the Late Preclassic Period suggests that there were various methods of providing feed to domesticated dogs. During this period human consumption of maize is variable. The authors argue that during this time, dogs were being consumed as meat sources.
+
+The variability decreases during the Classic Period, as uniform high values among all dogs indicate full dependence on maize. The same trend is observed in humans as they become more dependent on maize as well. The authors suggest that this is because dogs were no longer consumed as food, but kept as companions.
+
+# The Reproduction:
+
+For this project, I will be replicating three different types of analysis. First, I will recreate the visualization depicted in Figure 3 of the article, which shows the strontium values on the x-axis and the oxygen values on the y-axis. The figure has different colors representing the different types of animals and different symbols representing the different time periods. Then, I will replicate the descriptive statistics presented in Table 3 of the article. These statistics will be calculated for all three isotope values for dogs and deer divided by time period. Lastly, I will perform Student's t-tests to compare carbon values for dogs and humans across time periods.
+
+However, before starting any of the analysis I will clean up the data. When the data was downloaded from the supplementary information provided with the article, the information was saved in an excel document that contained two sheets. The first sheet contained the data from the fauna sample and the second sheet contained the data from the human sample. The first step to this project was separating this excel document into two documents (one for each table), cleaning up the tables in order for R to read the data, and saving the excel documents as .csv files. As such, the folder called "Data" within this repository should have the following files:
+
+1.  OriginalData.xlsx : The original excel workbook from the supplementary information.
+2.  Table1_Fauna.xlsx: Excel workbook with data from faunal sample.
+3.  Table1_Fauna.csv: Same as above, but saved as a comma separated values file.
+4.  Table2_Human.xlsx: Excel workbook with data from human sample.
+5.  Table2_Human.csv: Same as above, but saved as a comma separated values file.
+
+## Before We Start:
+
+Before any analysis begins, I will prepare RStudio for the analysis by loading the packages needed for all analyses. I will also add packages here as I use them further on to facilitate the process for those replicating this document later. All files will be read by using the read_csv() function.
+
+### Packages:
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+```
+
+### Reading the data:
+
+#### Fauna Data
+
+```{r}
+a <- ""
+```

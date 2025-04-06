@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.43">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,10 +64,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="Data-Replication_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="Data-Replication_files/libs/quarto-html/anchor.min.js"></script>
 <link href="Data-Replication_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Data-Replication_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="Data-Replication_files/libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="Data-Replication_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="Data-Replication_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Data-Replication_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="Data-Replication_files/libs/bootstrap/bootstrap-1bc8a17f135ab3d594c857e9f48e611b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -46,12 +80,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction:</a>
+  <li><a href="#citation" id="toc-citation" class="nav-link active" data-scroll-target="#citation">Citation:</a></li>
+  <li><a href="#the-original-study" id="toc-the-original-study" class="nav-link" data-scroll-target="#the-original-study">The Original Study:</a>
   <ul class="collapse">
-  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation:</a></li>
-  <li><a href="#summary-of-the-article" id="toc-summary-of-the-article" class="nav-link" data-scroll-target="#summary-of-the-article">Summary of the article:</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods:</a></li>
+  <li><a href="#data-used" id="toc-data-used" class="nav-link" data-scroll-target="#data-used">Data Used:</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results:</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions:</a></li>
   </ul></li>
-  <li><a href="#analysis-one" id="toc-analysis-one" class="nav-link" data-scroll-target="#analysis-one">Analysis One:</a></li>
+  <li><a href="#the-reproduction" id="toc-the-reproduction" class="nav-link" data-scroll-target="#the-reproduction">The Reproduction:</a>
+  <ul class="collapse">
+  <li><a href="#before-we-start" id="toc-before-we-start" class="nav-link" data-scroll-target="#before-we-start">Before We Start:</a>
+  <ul class="collapse">
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages:</a></li>
+  <li><a href="#reading-the-data" id="toc-reading-the-data" class="nav-link" data-scroll-target="#reading-the-data">Reading the data:</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -82,27 +126,94 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1">
-<h1>Introduction:</h1>
-<section id="citation" class="level2">
-<h2 class="anchored" data-anchor-id="citation">Citation:</h2>
+<section id="citation" class="level1">
+<h1>Citation:</h1>
 <p>Ashley E. Sharpe, Juan Manuel Palomo, Takeshi Inomata, Daniela Triadan, Flory Pinzón, Jason Curtis, Kitty Emery, George Kamenov, John Krigbaum, Jessica MacLellan, María Paula Weihmüller, <em>An isotopic examination of Maya Preclassic and Classic animal and human diets at Ceibal, Guatemala,</em> Journal of Archaeological Science: Reports, Volume 55, 2024, 104522, ISSN 2352-409X, <a href="https://doi.org/10.1016/j.jasrep.2024.104522." class="uri">https://doi.org/10.1016/j.jasrep.2024.104522.</a></p>
 </section>
-<section id="summary-of-the-article" class="level2">
-<h2 class="anchored" data-anchor-id="summary-of-the-article">Summary of the article:</h2>
-<ul>
-<li>No elvel</li>
-</ul>
+<section id="the-original-study" class="level1">
+<h1>The Original Study:</h1>
+<p>This article attempts to answer a question that has plagued Maya archaeologists ever since they first understood the magnitude of these ancient civilizations: How did the Maya sustain their cities through time and fluctuations in the population? The authors emphasize that there was no “universal” Maya diet, and as such, there was a lot of variation in dietary patterns across sites and across time. Thus, they argue, Ceibal is an ideal site to examine diet and subsistence through time because it had a long occupation that spanned from 1100 BC to 1200 CE. Ceibal was a significant political and ceremonial Maya center that experienced significant changes during its long occupation, including periods of abandonment and reoccupation.</p>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods:</h2>
+<p>To examine this, the authors aimed to understand the relationship between animals and humans, hoping to trace shifts in diet and animal management. Their methods involved using isotope analysis to get information about the samples. The study measured carbon, oxygen, and strontium isotope in dental enamel. Carbon (𝛅C<sup>13</sup>) was used to trace maize consumption by determining the proportion of C4 plants in the diet, oxygen (𝛅O<sup>18</sup>) was used to trace drinking water sources and estimate mobility, and strontium (Sr<sup>87</sup>/Sr<sup>86</sup>) was used to trace geographic origins based on regional geology. All three isotopes were measured for faunal samples, however only carbon isotopes were measured for the human samples.</p>
+<p>The measured isotope values for animals and humans were then analyzed statistically. The authors present descriptive statistics of the dog and deer isotope values for carbon, oxygen and strontium organized by chronological order. The distribution of values for each isotope was also analyzed statistically for each animal. Student’s t-tests were employed on the carbon values for dogs and humans for each time period to compare the difference in diets over time.</p>
+</section>
+<section id="data-used" class="level2">
+<h2 class="anchored" data-anchor-id="data-used">Data Used:</h2>
+<p>The fauna data contained 63 samples from non-human mammals excavated in Ceibal. The samples were excavated from different archaeological contexts and represented various different time periods, from the Early Middle Preclassic (1000-700 BCE) all the way to the Terminal Classic (810-950 CE). These samples came from various different types of teeth (molars, premolars, canines, and incisors). These faunal samples came from the following animals:</p>
+<ol type="1">
+<li>Domestic dog (<em>Canis lupus familiaris</em>): 45 samples</li>
+<li>White-tailed deer (<em>Odocoileus virginianus</em>): 7 samples</li>
+<li>Peccary (<em>Tayassuidae cf.&nbsp;Dicotyles tajacu</em>): 2 samples</li>
+<li>Baird’s tapir (<em>Tapirella bairdii</em>): 3 samples</li>
+<li>Large feline (possibly <em>Panthera onca</em>): 2 sample</li>
+<li>Margay (<em>Leopardus wiedii</em>): 1 sample</li>
+<li>Agouti (<em>Dasyprocta punctata</em>): 1 sample</li>
+<li>Paca (<em>Cuniculus paca</em>): 1 sample</li>
+<li>Opossum (<em>Philander opossum</em>): 1 sample</li>
+</ol>
+<p>The human data contained 21 samples from third molars and also represented individuals from different time periods. However, this sample only ranged from the Early Middle Preclassic to the Late Classic, there are no individuals from the Terminal Classic.</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results:</h2>
+<p>The strontium measurements in the faunal sample suggest that dogs were the most mobile species and indicate that a large portion of the dogs came from regions south and west of Ceibal. The authors highlight one specific dog, whose strontium values match the volcanic highlands, which supports evidence that dogs were transported over long distances. Furthermore, oxygen values for dogs match Ceibal’s water sources, pointing to domestication. On the other hand, strontium and oxygen values for deer are both consistent with local and regional sources. Interestingly, the strontium values of the peccary and agouti also suggest non-local origins, which could be the result of either hunting zones or trade networks.</p>
+<p>The carbon isotope results were also quite interesting. Dogs generally had higher values for carbon isotopes than humans, which indicates that dogs were eating more maize than humans were. Carbon results for deer were as expected, low values of 𝛅C<sup>13</sup> are consistent with a diet based on forest plants (C3 plants). Contrary to this, one large feline had higher 𝛅C<sup>13</sup> values than expected. Considering that these animals are carnivores, the elevated carbon values are evidence of higher maize consumption and could indicate that this animal was in captivity. The moderate values for the peccary and agouti imply that these animals consumed at least some maize. Lastly, carbon values for the human sample showed a clear increase of maize consumption through time, especially during the transition between the Preclassic and Classic periods.</p>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions:</h2>
+<p>When these results were compared across time periods and compared to human consumption of maize (as evidenced by the carbon values of the human sample), several conclusions can be reached. First of all, the strontium and oxygen values indicate that deer were local and their carbon values do not point towards domestication. Thus, the authors conclude that they were probably locally hunted.</p>
+<p>Carbon values for dogs suggest that they were fed maize from the Preclassic period and their dependence on maize increased heavily towards the Late Preclassic Period. However, variability during the Late Preclassic Period suggests that there were various methods of providing feed to domesticated dogs. During this period human consumption of maize is variable. The authors argue that during this time, dogs were being consumed as meat sources.</p>
+<p>The variability decreases during the Classic Period, as uniform high values among all dogs indicate full dependence on maize. The same trend is observed in humans as they become more dependent on maize as well. The authors suggest that this is because dogs were no longer consumed as food, but kept as companions.</p>
 </section>
 </section>
-<section id="analysis-one" class="level1">
-<h1>Analysis One:</h1>
-<ul>
-<li><p>Level 1</p>
-<ul>
-<li>Level 2</li>
-</ul></li>
-</ul>
+<section id="the-reproduction" class="level1">
+<h1>The Reproduction:</h1>
+<p>For this project, I will be replicating three different types of analysis. First, I will recreate the visualization depicted in Figure 3 of the article, which shows the strontium values on the x-axis and the oxygen values on the y-axis. The figure has different colors representing the different types of animals and different symbols representing the different time periods. Then, I will replicate the descriptive statistics presented in Table 3 of the article. These statistics will be calculated for all three isotope values for dogs and deer divided by time period. Lastly, I will perform Student’s t-tests to compare carbon values for dogs and humans across time periods.</p>
+<p>However, before starting any of the analysis I will clean up the data. When the data was downloaded from the supplementary information provided with the article, the information was saved in an excel document that contained two sheets. The first sheet contained the data from the fauna sample and the second sheet contained the data from the human sample. The first step to this project was separating this excel document into two documents (one for each table), cleaning up the tables in order for R to read the data, and saving the excel documents as .csv files. As such, the folder called “Data” within this repository should have the following files:</p>
+<ol type="1">
+<li>OriginalData.xlsx : The original excel workbook from the supplementary information.</li>
+<li>Table1_Fauna.xlsx: Excel workbook with data from faunal sample.</li>
+<li>Table1_Fauna.csv: Same as above, but saved as a comma separated values file.</li>
+<li>Table2_Human.xlsx: Excel workbook with data from human sample.</li>
+<li>Table2_Human.csv: Same as above, but saved as a comma separated values file.</li>
+</ol>
+<section id="before-we-start" class="level2">
+<h2 class="anchored" data-anchor-id="before-we-start">Before We Start:</h2>
+<p>Before any analysis begins, I will prepare RStudio for the analysis by loading the packages needed for all analyses. I will also add packages here as I use them further on to facilitate the process for those replicating this document later. All files will be read by using the read_csv() function.</p>
+<section id="packages" class="level3">
+<h3 class="anchored" data-anchor-id="packages">Packages:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'patchwork' was built under R version 4.4.3</code></pre>
+</div>
+</div>
+</section>
+<section id="reading-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="reading-the-data">Reading the data:</h3>
+<section id="fauna-data" class="level4">
+<h4 class="anchored" data-anchor-id="fauna-data">Fauna Data</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="st">""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
 </section>
 
 </main>
@@ -189,8 +300,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -301,7 +410,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
