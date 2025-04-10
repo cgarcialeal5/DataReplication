@@ -1,4 +1,4 @@
-Specimen,SciName,ComName,Tooth,ToothSide,Excav_unit,Location_Site,ContextType,TimePeriod,Chronology,C13,O18,Sr86/Sr87,SrError,SrConcentration,Comments
+Specimen,SciName,ComName,Tooth,ToothSide,Excav_unit,Location_Site,ContextType,TimePeriod,Chronology,C13,O18,Sr87_Sr86,SrError,SrConcentration,Comments
 2a,Canis lupus familiaris,Domestic Dog,M2,left,CB 205A-1-7-16 (Run 1),"Group A, Str. A-18",Midden,Late Middle Preclassic (Escoba-Mamom 3),450-350 BCE,n/a,n/a,0.707026,0.000009,n/a,"reported in Sharpe et al. 2018; Beta-466114 date 541 - 389 cal BCE (IntCal20, 95.4%)"
 2b,Canis lupus familiaris,Domestic Dog,M2,left,CB 205A-1-7-16 (Run 2),"Group A, Str. A-18",Midden,Late Middle Preclassic (Escoba-Mamom 3),450-350 BCE,-2.5,-6.3,0.707093,0.000014,n/a,reported in Sharpe et al. 2018
 4,Canis lupus familiaris,Domestic Dog,M1,left,CB 205A-1-7-10,"Group A, Str. A-18",Fill (possible intrusion),Late Middle Preclassic (Escoba-Mamom 3),450-350 BCE,-3.9,-4.8,0.707599,0.000017,n/a,reported in Sharpe et al. 2018
@@ -65,5 +65,3 @@ Specimen,SciName,ComName,Tooth,ToothSide,Excav_unit,Location_Site,ContextType,Ti
 109,Odocoileus virginianus,White-tailed Deer,M1 or 2,left,CB 219A-7-4-2,"Group D, West Plaza near Str. D-6",Fill,Late/Terminal Classic (Tepejilote-Bayal),600-950 CE,-14.3,1.8,0.707482,0.0000098,70.34,
 110,Tapirella bairdii,Baird's Tapir,I1,right?,CB 211D-1-6-3,"Karinel Group, southeast part of platform",Fill,Late Middle Preclassic (Escoba-Mamom 3),450-350 BCE,-14.6,-4.6,0.707654,0.000014,151.62,
 111,Tayassuidae cf. Dicotyles tajacu,Collared (?) Peccary,CU,right?,CB 211B-5-1-2,"Karinel Group, North of Str. 46",Humus/collapse,Terminal Classic (Bayal),810-950 CE,-6.8,-3.4,0.70719,0.00001,43.57,"size seems small for white-lipped peccary (Tayassu pecari), so this is *possibly* collared peccary"
-"aI = incisor, C = canine, M = molar, P = premolar; numbers denote tooth position and upper (superscript) or lower (subscript) dentition",,,,,,,,,,,,,,,
-bSr concentration not reported in Sharpe et al. 2018,,,,,,,,,,,,,,,
