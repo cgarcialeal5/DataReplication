@@ -9,6 +9,8 @@ toc: TRUE
 toc_depth: 3
 ---
 
+
+
 # Citation:
 
 Ashley E. Sharpe, Juan Manuel Palomo, Takeshi Inomata, Daniela Triadan, Flory Pinzón, Jason Curtis, Kitty Emery, George Kamenov, John Krigbaum, Jessica MacLellan, María Paula Weihmüller, *An isotopic examination of Maya Preclassic and Classic animal and human diets at Ceibal, Guatemala,* Journal of Archaeological Science: Reports, Volume 55, 2024, 104522, ISSN 2352-409X, [https://doi.org/10.1016/j.jasrep.2024.104522](https://doi.org/10.1016/j.jasrep.2024.104522.){.uri}
@@ -94,6 +96,8 @@ While I will specify when I am using each package and function when they are use
 
 ### Packages:
 
+
+
 ```{r}
 #| echo: true
 #| eval: true
@@ -110,11 +114,15 @@ library(gridExtra)
 library(grid)
 ```
 
+
+
 ### Reading and cleaning the data:
 
 #### Fauna Data
 
 This data set will be named "f" to represent fauna data.
+
+
 
 ```{r}
 a <- "C:/Users/cglea/OneDrive/UT-Austin/Repos/DataReplication/Data/Table1_Fauna.csv"
@@ -123,7 +131,11 @@ f <- read_csv(a, col_names = TRUE)
 head(f)
 ```
 
+
+
 Now, I must also clean the data and rename the data in the column Common Name that show different variations of the same (or similar) animals. For example, there is one data entry that says "Jaguar" and another that is called "Large Feline (Jaguar?). For the sake of these analyses, both will be categorized as "Large Feline." I will also change the names to more closely resemble the ones used throughout the article (for example, "Domestic Dog" is simply shown as "Dog" in the article).
+
+
 
 ```{r}
 f <- f %>%
@@ -142,7 +154,11 @@ f <- f %>%
   )) 
 ```
 
+
+
 I will also group together the time periods and rename them to match the time period as shown in the article's graphs and tables. This way, for example, all ceramic phases of the Early Classic will be grouped together and renamed as "EC".
+
+
 
 ```{r}
 f <- f %>%
@@ -158,7 +174,11 @@ f <- f %>%
   ))
 ```
 
+
+
 The tibble also shows that all columns are stored as character data, so before beginning the analysis, I will also properly categorize all columns either as categorical or as numerical, depending on the information they contain. This step was done by mutating the column to `as.numeric` using the `mutate()` function from the `{dplyr}` package for the columns with numeric data and then also mutating the columns to `as.factor` using the `mutate()` function from the `{dplyr}` package for the columns with categorical data.
+
+
 
 ```{r}
 f <- f %>%
@@ -173,7 +193,11 @@ f <- f %>%
   mutate(SrConcentration = as.numeric(ifelse(SrConcentration == "n/a", NA, SrConcentration)))
 ```
 
+
+
 The resulting table should look like this:
+
+
 
 ```{r}
 #| echo: false
@@ -183,9 +207,13 @@ f %>%
   kableExtra::scroll_box(width = "100%", height = "600px")
 ```
 
+
+
 #### Human Data
 
 This data set will be named "h" to represent human data.
+
+
 
 ```{r}
 b <- "C:/Users/cglea/OneDrive/UT-Austin/Repos/DataReplication/Data/Table2_Human.csv"
@@ -194,7 +222,11 @@ h <- read_csv(b, col_names = TRUE)
 head(h)
 ```
 
+
+
 I will also modify the categories for time period in order to match the data from the fauna data set.
+
+
 
 ```{r}
 h <- h %>%
@@ -210,7 +242,11 @@ h <- h %>%
   ))
 ```
 
+
+
 This data set is significantly simpler than the fauna data set. Therefore, I will only modify the table to convert Time Period to `as.factor` and C13 to `as.numeric`, using the same methods I used on the fauna data set. I will also convert the "plus or minus" sign that appeared in the original excel in order for R to read the data clearly.
+
+
 
 ```{r}
 h <- h %>%
@@ -220,7 +256,11 @@ h <- h %>%
 h[] <-lapply(h, function(x) if(is.character(x)) iconv(x, from = "latin1", to = "UTF-8") else x)
 ```
 
+
+
 The resulting table should look like this:
+
+
 
 ```{r}
 #| echo: false
@@ -230,11 +270,15 @@ h %>%
   kableExtra::scroll_box(width = "100%", height = "600px")
 ```
 
+
+
 ## Analysis One: Visualization
 
 The analysis that is being replicated here is the visualization shown in Figure 3 of the article. This image is found on page 5 of the .pdf document.
 
 To start, this is the original image:
+
+
 
 ```{r, out.width="100%", fig.align="center"}
 #| echo: false
@@ -243,6 +287,8 @@ To start, this is the original image:
 include_graphics("Images/Figure3_SrO_vis.png")
 
 ```
+
+
 
 This image can be used to broadly see the range of values for the strontium ratio and the range of values for oxygen for each animal and per period. Thus, our visualization replication has four objectives:
 
@@ -260,6 +306,8 @@ Then the data set will first be filtered to remove rows with `NA` for either of 
 
 For this step, I am going to name the filtered tibble `f_vis1` to represent the fauna data filtered for the visualization analysis. For this step, I am using the `filter` function. The code chunk will show you the new tibble without the `NA` values. I am also going to use `mutate()` and `factor()` to specify the order and levels of the category for names. The table showing the new tibble was created using the `{kableExtra}` package and the code was hidden using the `#| echo: false`.
 
+
+
 ```{r}
 f_vis1 <- f %>%
   filter(!is.na(Sr87_Sr86)) %>%
@@ -267,7 +315,11 @@ f_vis1 <- f %>%
   
 ```
 
+
+
 Now, the new tibble only includes 56 rows, all of which have values for both O18 and Sr87_Sr86:
+
+
 
 ```{r}
 #| echo: false
@@ -279,9 +331,13 @@ f_vis1 %>%
   kableExtra::scroll_box(width = "100%", height = "600px")
 ```
 
+
+
 ### Step 2: Creating the plot
 
 This objective was achieved using the package `{ggplot2}`. The plot will be named as `f_plot1` and saved as an image (.png) in the Images folder on the Github repository.
+
+
 
 ```{r}
 taxa_order <- c("Dog", "Large Feline", "Margay", "Paca", "Agouti", "Opossum", "Deer", "Peccary", "Tapir")
@@ -317,9 +373,13 @@ f_plot1 <- ggplot(f_vis1, aes(
 print(f_plot1)
 ```
 
+
+
 ### Step 3: Saving the image:
 
 This step only served to save the image on the Images directory.
+
+
 
 ```{r}
 ggsave(
@@ -331,7 +391,11 @@ ggsave(
   )
 ```
 
+
+
 ### Conclusions:
+
+
 
 ```{r, out.width="100%", fig.align="center", echo=FALSE}
 O_vis <- rasterGrob(png::readPNG("Images/Figure3_SrO_vis.png"))
@@ -343,6 +407,8 @@ grid.arrange(O_vis, my_vis, ncol = 2, top = textGrob(
   padding = unit(0, "line"))
 ```
 
+
+
 These two images show the original version of the graph and my reproduction. Both images look quite similar, however there are some key differences. Unlike the first image, my reproduction does not label any specific individuals. In addition, I did not change the titles to match the original graph. Despite that, the reproduction does show the same (or very similar) shapes and colors to represent each animal species and each time period. To do this, I looked at the ggplot [cheatsheet](https://rstudio.github.io/cheatsheets/html/data-visualization.html#themes) on the posit website. I also looked at a list of ggplot [colors](https://sape.inf.usi.ch/quick-reference/ggplot2/colour) and [shapes](https://ggplot2.tidyverse.org/index.html). However, I was not able to get the symbol for TC to fill. Therefore, only the outline of the shape is colored according to taxa.
 
 ## Analysis Two: Descriptive Statistics
@@ -351,12 +417,16 @@ The analysis that is being replicated here is the descriptive statistics shown i
 
 To start, this is the original image:
 
+
+
 ```{r, out.width="100%", fig.align="center"}
 #| echo: false
 #| output: true
 
 include_graphics("Images/Table3_DescStats.png")
 ```
+
+
 
 This table shows the mean, standard deviation, and range for each of the three isotopes that were measured. However, these values are calculated separately for dogs and deer in each time period. In addition, the Late Classic and the Terminal Classic periods were combined on this table. Thus, this analysis has the following objectives:
 
@@ -381,6 +451,8 @@ This analysis will be done using the packages `dplyr` and `tidyr`.
 ### Step 1: The analysis
 
 For this step, I am creating a new tibble names `Desc.Stats` with the relevant statistics. To create this table, first I combined the LC and TC time periods with the `mutate()` function. The next two steps used `filter()` and `group_by()` functions to make sure that the descriptive statistics were only calculated for dogs and deer during each time period. Lastly, I calculated the actual statistics for each isotope using `summarise()` and the specific descriptive statistics formulas (mean, standard deviation, and range).
+
+
 
 ```{r}
 species <- c("Dog", "Deer")
@@ -410,7 +482,11 @@ f_desc1 <- f %>%
 
 ```
 
+
+
 The resulting table from this analysis contains the same statistics from the original data. However, it looks different:
+
+
 
 ```{r}
 #| echo: false
@@ -420,9 +496,13 @@ f_desc1 %>%
   kableExtra::scroll_box(width = "100%", height = "600px")
 ```
 
+
+
 ### Step 2: Organizing the table
 
 This step is purely to re-organize the results from above to more closely match the original table from the article. For this, I will use the `select()`, `mutate()`, and `arrange` functions. The first function will help us reorganize the columns so that they appear in the same order as the original table. The second will be used to round only the values that are rounded in the original table. And lastly, the function called arrange will allow us to arrange the rows in the same order as the original table. I also created a new tibble, `N_Ind`, to count the number of individuals that were used from the original data table to calculate the descriptive statistics. This was also added to each row in the ComName column.
+
+
 
 ```{r}
 N_Ind <- f %>%
@@ -459,7 +539,11 @@ f_desc2 <- f_desc1 %>%
   
 ```
 
+
+
 Once this is accomplished, the new table should ressemble the original data more closely. However, I must note that I did not modify the aesthetics of the reproduction to look the same as the original data. The new table is only modified to round the numbers and organized to look like the original table.
+
+
 
 ```{r}
 #| echo: false
@@ -469,9 +553,13 @@ f_desc2 %>%
   kableExtra::scroll_box(width = "100%", height = "600px")
 ```
 
+
+
 ### Step 3: Saving the tibble as an image
 
 In order to compare the result from this analysis to the original descriptive analysis, I want to save the tibble as an image I can embed later to this document. To do this, I will use the package `{kableExtra}` and `{webshot}`.
+
+
 
 ```{r}
 f_desc2 %>%
@@ -486,7 +574,11 @@ webshot("Images/my_desc.html",
         selector = "table")
 ```
 
+
+
 ### Conclusions:
+
+
 
 ```{r, out.width="100%", fig.align="center", echo=FALSE}
 O_desc <- rasterGrob(png::readPNG("Images/Table3_DescStats.png"))
@@ -496,6 +588,8 @@ grid.arrange(O_desc, my_desc, nrow = 2, top = textGrob(
   "Original ontop and reproduction on the bottom"),
   padding = unit(0, "line"))
 ```
+
+
 
 In order to use `{kableExtra}` I looked at a knitr::kableExtra [cheat sheet](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html#Overview) on cran, this allowed me to add a grouped row heading to the table. Although the results of the reproduction are an exact match in some instances, it is not always the case. The count of the sample is wrong for LMP Dog, LP.TP Dog, and LC.TC Dog. In each of these cases, my reproduction counted one more row of data than the original article did. This shows that the authors cleaned up the data before running the analysis. However, because they did not specify which values were removed from the original data, I was not able to edit the analysis to count the same number of individuals from the original paper. Despite this, the only values that were affected across most isotopes were the values for LP.TP Dog. In the other instances were the number of individuals in the sample varied from the article, only one of the values was affected.
 
@@ -519,6 +613,8 @@ To conduct this analysis I will do the following:
 
 To create the new tibble I used the functions `filter()` and `select()` to filter the fauna data for dogs only and select the columns TimePeriod, ComName, and C13. Then I used the function `bind_rows()` to add TimePeriod and C13 from the human data to the new tibble. Then, I used `mutate()` to combine LC and TC so that rows with either value in TimePeriod now contain the value LC.TC. Lastly, I will filter the data to remove any rows that show `NA` in the C13 column.
 
+
+
 ```{r}
 dh_infer1 <- f %>%
   filter(ComName == "Dog") %>%
@@ -535,7 +631,11 @@ dh_infer1 <- f %>%
   filter(!is.na(C13))
 ```
 
+
+
 Once cleaned for this analysis, the table should look like this:
+
+
 
 ```{r}
 #| echo: false
@@ -545,9 +645,13 @@ dh_infer1 %>%
   kableExtra::scroll_box(width = "100%", height = "600px")
 ```
 
+
+
 ### Step 2: Comparison using Student's t-test
 
 This step will contain various components. First, I will group the data by time period. Then I will filter to keep only data from time periods that have values for both dogs and humans by using `group_by()` to group the data by time period and filter the data to keep only the groups that have values for both dogs and humans. Then I will use the `do()` function to make sure the rest of the code runs for each time period. Within the `do()` function, I will use three different functions: `lm()` from the `{stats}` package to run the models for all time periods, `summary()` to summarize the models, and `tibble()` to create a tibble with the results.
+
+
 
 ```{r}
 dh_infer2 <- dh_infer1 %>%
@@ -571,7 +675,11 @@ dh_infer2 <- dh_infer1 %>%
   )
 ```
 
+
+
 ### Step 3: Saving the tibble as an image
+
+
 
 ```{r}
 dh_infer2 %>%
@@ -582,9 +690,13 @@ dh_infer2 %>%
 webshot("Images/my_infer.html", "Images/my_infer.png", selector = "table")
 ```
 
+
+
 ### Conclusions:
 
 Although there is no image from this analysis in the original article, the article does state that the p value for the comparison between dogs and humans during the LMP is 0.13. My reproduction analyzed the Student's t-test and p-values for all time periods:
+
+
 
 ```{r, out.width="100%", fig.align="center", echo=FALSE}
 my_infer <- rasterGrob(png::readPNG("Images/my_infer.png"))
@@ -598,4 +710,7 @@ grid.arrange(my_infer,
 
 ```
 
+
+
 In this table, the p-value for the comparison between the carbon isotope values for dogs and humans during the LMP is 0.13, which is an exact match to the author's estimate in the article. In addition, all the estimates for the p-values show that the comparisons are not statistically significant. While the authors do not specify the p-values for the comparisons of other time periods, they do state that non of the comparisons were statistically significant. The results of my reproduction support this argument.
+

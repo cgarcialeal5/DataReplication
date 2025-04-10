@@ -115,6 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#analysis-three-inferential-statistics" id="toc-analysis-three-inferential-statistics" class="nav-link" data-scroll-target="#analysis-three-inferential-statistics">Analysis Three: Inferential Statistics</a>
   <ul class="collapse">
+  <li><a href="#step-1-create-and-clean-new-tibble" id="toc-step-1-create-and-clean-new-tibble" class="nav-link" data-scroll-target="#step-1-create-and-clean-new-tibble">Step 1: Create and clean new tibble</a></li>
   <li><a href="#step-2-comparison-using-students-t-test" id="toc-step-2-comparison-using-students-t-test" class="nav-link" data-scroll-target="#step-2-comparison-using-students-t-test">Step 2: Comparison using Student’s t-test</a></li>
   <li><a href="#step-3-saving-the-tibble-as-an-image-1" id="toc-step-3-saving-the-tibble-as-an-image-1" class="nav-link" data-scroll-target="#step-3-saving-the-tibble-as-an-image-1">Step 3: Saving the tibble as an image</a></li>
   <li><a href="#conclusions-3" id="toc-conclusions-3" class="nav-link" data-scroll-target="#conclusions-3">Conclusions:</a></li>
@@ -3347,10 +3348,11 @@ dbl (1): C13
 <li><p>Combine the time periods LC and TC as a new value.</p></li>
 <li><p>Combine this data in a new tibble called “dh” with the following columns: ComName, TimePeriod, and C13</p></li>
 <li><p>Run Student’s t-tests to compare C13 values of dogs and humans across time periods</p></li>
-<li><p>Round the t-test results to 2 decimal points as shown in the article</p>
-<h3 id="step-1-create-and-clean-new-tibble" class="anchored">Step 1: Create and clean new tibble</h3>
-<p>To create the new tibble I used the functions <code>filter()</code> and <code>select()</code> to filter the fauna data for dogs only and select the columns TimePeriod, ComName, and C13. Then I used the function <code>bind_rows()</code> to add TimePeriod and C13 from the human data to the new tibble. Then, I used <code>mutate()</code> to combine LC and TC so that rows with either value in TimePeriod now contain the value LC.TC. Lastly, I will filter the data to remove any rows that show <code>NA</code> in the C13 column.</p></li>
+<li><p>Round the t-test results to 2 decimal points as shown in the article</p></li>
 </ul>
+<section id="step-1-create-and-clean-new-tibble" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-create-and-clean-new-tibble">Step 1: Create and clean new tibble</h3>
+<p>To create the new tibble I used the functions <code>filter()</code> and <code>select()</code> to filter the fauna data for dogs only and select the columns TimePeriod, ComName, and C13. Then I used the function <code>bind_rows()</code> to add TimePeriod and C13 from the human data to the new tibble. Then, I used <code>mutate()</code> to combine LC and TC so that rows with either value in TimePeriod now contain the value LC.TC. Lastly, I will filter the data to remove any rows that show <code>NA</code> in the C13 column.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dh_infer1 <span class="ot">&lt;-</span> f <span class="sc">%&gt;%</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ComName <span class="sc">==</span> <span class="st">"Dog"</span>) <span class="sc">%&gt;%</span></span>
@@ -3715,6 +3717,7 @@ dbl (1): C13
 
 </div>
 </div>
+</section>
 <section id="step-2-comparison-using-students-t-test" class="level3">
 <h3 class="anchored" data-anchor-id="step-2-comparison-using-students-t-test">Step 2: Comparison using Student’s t-test</h3>
 <p>This step will contain various components. First, I will group the data by time period. Then I will filter to keep only data from time periods that have values for both dogs and humans by using <code>group_by()</code> to group the data by time period and filter the data to keep only the groups that have values for both dogs and humans. Then I will use the <code>do()</code> function to make sure the rest of the code runs for each time period. Within the <code>do()</code> function, I will use three different functions: <code>lm()</code> from the <code>{stats}</code> package to run the models for all time periods, <code>summary()</code> to summarize the models, and <code>tibble()</code> to create a tibble with the results.</p>
